@@ -1,0 +1,26 @@
+# Configuración local de PostgreSQL para whatsapp-nest-starter.
+# Un solo servicio; datos persistentes en un volumen nombrado.
+# Las credenciales y el puerto se inyectan desde .env (ver .env.example).
+services:
+  postgres:
+    image: postgres:16
+    container_name: whatsapp-nest-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      # Publicado solo en loopback; puerto local configurable.
+      - "127.0.0.1:${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  postgres_data:
