@@ -68,7 +68,7 @@ Disponibilidad de PostgreSQL (dentro del contenedor, sin instalar
 `psql` en Windows):
 
 ```
-docker compose exec postgres pg_isready -U wapp_user -d whatsapp_nest
+docker compose --env-file .env exec postgres pg_isready -U wapp_user -d whatsapp_nest
 ```
 
 Probar la API (otra ventana de CMD):
@@ -86,7 +86,7 @@ Con NestJS corriendo, sin reiniciarlo:
 1. Detener solo PostgreSQL:
 
    ```
-   docker compose stop postgres
+   docker compose --env-file .env stop postgres
    ```
 
 2. Consultar: `curl -i http://localhost:3000/health` →
@@ -96,7 +96,7 @@ Con NestJS corriendo, sin reiniciarlo:
 3. Reactivar PostgreSQL:
 
    ```
-   docker compose start postgres
+   docker compose --env-file .env start postgres
    ```
 
 4. Esperar a que responda (`pg_isready`) y volver a consultar
