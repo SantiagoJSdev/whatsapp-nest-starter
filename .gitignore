@@ -1,0 +1,18 @@
+# Dependencias
+/node_modules
+
+# Compilación
+/dist
+
+# Entorno: excluye .env pero conserva .env.example
+.env
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / SO
+.DS_Store
+.idea/
+.vscode/
